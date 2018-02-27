@@ -206,7 +206,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)disableNetworkWithCompletion:(nullable FSTVoidErrorBlock)completion {
-  [self.workerDispatchQueue dispatchAsync:^{
+  [self.workerDispatchQueue dispatchAsyncAllowingSameQueue:^{
     [self.remoteStore disableNetwork];
     if (completion) {
       [self.userDispatchQueue dispatchAsync:^{
@@ -217,7 +217,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)enableNetworkWithCompletion:(nullable FSTVoidErrorBlock)completion {
-  [self.workerDispatchQueue dispatchAsync:^{
+  [self.workerDispatchQueue dispatchAsyncAllowingSameQueue:^{
     [self.remoteStore enableNetwork];
     if (completion) {
       [self.userDispatchQueue dispatchAsync:^{
@@ -228,7 +228,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)shutdownWithCompletion:(nullable FSTVoidErrorBlock)completion {
-  [self.workerDispatchQueue dispatchAsync:^{
+  [self.workerDispatchQueue dispatchAsyncAllowingSameQueue:^{
     self.credentialsProvider.userChangeListener = nil;
 
     [self.remoteStore shutdown];
@@ -249,7 +249,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                                options:options
                                                    viewSnapshotHandler:viewSnapshotHandler];
 
-  [self.workerDispatchQueue dispatchAsync:^{
+  [self.workerDispatchQueue dispatchAsyncAllowingSameQueue:^{
     [self.eventManager addListener:listener];
   }];
 
@@ -257,14 +257,14 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)removeListener:(FSTQueryListener *)listener {
-  [self.workerDispatchQueue dispatchAsync:^{
+  [self.workerDispatchQueue dispatchAsyncAllowingSameQueue:^{
     [self.eventManager removeListener:listener];
   }];
 }
 
 - (void)writeMutations:(NSArray<FSTMutation *> *)mutations
             completion:(nullable FSTVoidErrorBlock)completion {
-  [self.workerDispatchQueue dispatchAsync:^{
+  [self.workerDispatchQueue dispatchAsyncAllowingSameQueue:^{
     if (mutations.count == 0) {
       if (completion) {
         [self.userDispatchQueue dispatchAsync:^{
@@ -288,7 +288,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)transactionWithRetries:(int)retries
                    updateBlock:(FSTTransactionBlock)updateBlock
                     completion:(FSTVoidIDErrorBlock)completion {
-  [self.workerDispatchQueue dispatchAsync:^{
+  [self.workerDispatchQueue dispatchAsyncAllowingSameQueue:^{
     [self.syncEngine transactionWithRetries:retries
                         workerDispatchQueue:self.workerDispatchQueue
                                 updateBlock:updateBlock
@@ -300,7 +300,6 @@ NS_ASSUME_NONNULL_BEGIN
                                      }];
                                    }
                                  }];
-
   }];
 }
 
