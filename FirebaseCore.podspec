@@ -31,6 +31,8 @@ Firebase Core includes FIRApp and FIROptions which provide central configuration
     'SystemConfiguration'
   ]
   s.dependency 'GoogleToolboxForMac/NSData+zlib', '~> 2.1'
+  s.dependency 'FirebaseAnalytics'
+  s.dependency 'FirebaseInstanceID'
   s.pod_target_xcconfig = {
     'OTHER_CFLAGS' => '-fno-autolink ' +
       '-DFIRCore_VERSION=' + s.version.to_s + ' -DFirebase_VERSION=4.8.0'
