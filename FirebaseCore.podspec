@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'NextzyFirebaseCore'
+  s.name             = 'FirebaseCore'
   s.version          = '4.0.16'
   s.summary          = 'Firebase Core for iOS'
 
@@ -16,7 +16,7 @@ Firebase Core includes FIRApp and FIROptions which provide central configuration
     :tag => s.version.to_s
   }
   s.social_media_url = 'https://twitter.com/Firebase'
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.10'
   s.tvos.deployment_target = '10.0'
 
