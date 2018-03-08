@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'FirebaseCore'
+  s.name             = 'NextzyFirebaseCore'
   s.version          = '4.0.16'
   s.summary          = 'Firebase Core for iOS'
 
